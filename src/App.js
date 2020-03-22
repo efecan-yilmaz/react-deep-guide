@@ -3,6 +3,25 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import styled from 'styled-components';
+// import Radium, { StyleRoot } from 'radium';
+
+// self note: styled-components are not actually makes sense. don't use it in real project.
+// use css modules and separate files.
+
+const StyledButton = styled.button`
+    background-color: ${props => props.alt ? 'red' : 'green'};
+    color: white;
+    font: inherit;
+    border: 1px solid blue;
+    padding: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+      color: black;
+    }
+`;
 
 class App extends Component {
   state = {
@@ -61,13 +80,20 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    }
+    /* ///////////////// npm install --save radium ///////////////// pseudo and media queries*/ 
+    /* ///////////////// npm install --save styled-components ///////////////// */ 
+    // const style = {
+    //   backgroundColor: 'green',
+    //   color: 'white',
+    //   font: 'inherit',
+    //   border: '1px solid blue',
+    //   padding: '8px',
+    //   cursor: 'pointer',
+    //   // ':hover': {
+    //   //   backgroundColor: 'lightgreen',
+    //   //   color: 'black'
+    //   // }
+    // }
     
     let persons = null;
 
@@ -84,17 +110,50 @@ class App extends Component {
               />
           })}
         </div>
-      )
+      );
+
+    //   style.backgroundColor = 'red';
+    //   // style[':hover'] = {
+    //   //   backgroundColor: 'salmon',
+    //   //   color: 'black'
+    //   // }
     }
+
+    const classes = [];
+
+    if (this.state.persons.length <= 2) classes.push('red');
+    if (this.state.persons.length <= 1) classes.push('bold');
 
     return (
       <div className="App">
         <h1>Hi babe! Wanna hang?</h1>
-        <p>You were good babe!</p>
-        <button style={style} onClick={this.togglePersonHandler}>Toggle Persons</button>
+        <p className={classes.join(' ')}>You were good babe!</p>
+        <button className="button" onClick={this.togglePersonHandler}>Toggle Persons</button>
         {persons}
       </div>
     );
+
+    
+    // return (
+    //   <div className="App">
+    //     <h1>Hi babe! Wanna hang?</h1>
+    //     <p className={classes.join(' ')}>You were good babe!</p>
+    //     {/* <button style={style} onClick={this.togglePersonHandler}>Toggle Persons</button> */}
+    //     <StyledButton alt={this.state.showPersons} onClick={this.togglePersonHandler}>Toggle Person</StyledButton>
+    //     {persons}
+    //   </div>
+    // );
+
+    // return ( Radium
+    //   <StyleRoot>
+    //     <div className="App">
+    //       <h1>Hi babe! Wanna hang?</h1>
+    //       <p className={classes.join(' ')}>You were good babe!</p>
+    //       <button style={style} onClick={this.togglePersonHandler}>Toggle Persons</button>
+    //       {persons}
+    //     </div>
+    //   </StyleRoot>
+    // );
 
     // render() {
     //   const style = {
@@ -160,6 +219,7 @@ class App extends Component {
   }
 }
 
+// export default Radium(App);
 export default App;
 
 // React Hooks ----> Important setPersonsState will override whole state won't replace the value you passed.

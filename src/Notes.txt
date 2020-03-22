@@ -1,0 +1,1 @@
+run npm eject to revert react-script structure and have full access to config files
