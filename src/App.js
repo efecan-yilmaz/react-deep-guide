@@ -1,27 +1,27 @@
 //Class-based Component
 
 import React, { Component } from 'react';
-import './App.css';
+import classes from  './App.css';
 import Person from './Person/Person';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 // import Radium, { StyleRoot } from 'radium';
 
 // self note: styled-components are not actually makes sense. don't use it in real project.
 // use css modules and separate files.
 
-const StyledButton = styled.button`
-    background-color: ${props => props.alt ? 'red' : 'green'};
-    color: white;
-    font: inherit;
-    border: 1px solid blue;
-    padding: 8px;
-    cursor: pointer;
+// const StyledButton = styled.button`
+//     background-color: ${props => props.alt ? 'red' : 'green'};
+//     color: white;
+//     font: inherit;
+//     border: 1px solid blue;
+//     padding: 8px;
+//     cursor: pointer;
 
-    &:hover {
-      background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
-      color: black;
-    }
-`;
+//     &:hover {
+//       background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+//       color: black;
+//     }
+// `;
 
 class App extends Component {
   state = {
@@ -94,8 +94,9 @@ class App extends Component {
     //   //   color: 'black'
     //   // }
     // }
-    
+   
     let persons = null;
+    let btnClass = [];
 
     if (this.state.showPersons) {
       persons = (
@@ -117,18 +118,21 @@ class App extends Component {
     //   //   backgroundColor: 'salmon',
     //   //   color: 'black'
     //   // }
+    btnClass = classes.Red;
     }
 
-    const classes = [];
+    // const classes = []; -> changed after css modules
+    const assignedClasses = [];
 
-    if (this.state.persons.length <= 2) classes.push('red');
-    if (this.state.persons.length <= 1) classes.push('bold');
+    if (this.state.persons.length <= 2) assignedClasses.push(classes.red);
+    if (this.state.persons.length <= 1) assignedClasses.push(classes.bold);
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi babe! Wanna hang?</h1>
-        <p className={classes.join(' ')}>You were good babe!</p>
-        <button className="button" onClick={this.togglePersonHandler}>Toggle Persons</button>
+        <p className={assignedClasses.join(' ')}>You were good babe!</p>
+        <button className={btnClass}  onClick={this.togglePersonHandler}>Toggle Persons</button>
+        {/* <button className="button" onClick={this.togglePersonHandler}>Toggle Persons</button> */}
         {persons}
       </div>
     );

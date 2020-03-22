@@ -1,1 +1,21 @@
 run npm eject to revert react-script structure and have full access to config files
+
+to activate css modules: 
+run npm eject
+open -> config/webpack.config.dev.js
+find -> test: /\.css$/,
+add -> test: /\.css$/,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 1,
+                  modules: true,  -------- this --------
+                  localIdentName: '[name]__[local]_[hash:base64:5]' -------- this --------
+                },
+              },
+
+repeat -> for prod file
+
+if you are using higher than 2.0 react-script you don't need to eject and change config. You can simply add .module to css names and imports to start using css modules.
