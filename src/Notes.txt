@@ -19,3 +19,6 @@ add -> test: /\.css$/,
 repeat -> for prod file
 
 if you are using higher than 2.0 react-script you don't need to eject and change config. You can simply add .module to css names and imports to start using css modules.
+
+
+React developer tools
