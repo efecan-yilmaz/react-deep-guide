@@ -80,7 +80,6 @@ class App extends Component {
         <h1>Hi babe! Wanna hang?</h1>
         <p className={assignedClasses.join(' ')}>You were good babe!</p>
         <button className={btnClass}  onClick={this.togglePersonHandler}>Toggle Persons</button>
-        {/* <button className="button" onClick={this.togglePersonHandler}>Toggle Persons</button> */}
         {persons}
       </div>
     );
