@@ -13,7 +13,7 @@ const Cockpit = (props) => {
 
     return(
         <div className={classes.Cockpit}>
-            <h1>One project to rule them all!</h1>
+            <h1>{props.title}</h1>
             <p className={assignedClasses.join(' ')}>In the darkness, bind them!</p>
             <button className={btnClass}  onClick={props.clicked}>Toggle Persons</button>
         </div>

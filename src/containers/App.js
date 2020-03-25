@@ -6,6 +6,14 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
+
+  constructor(props) {
+    // 1
+    super(props);
+    console.log('[App.js] constructor');
+    // you can also set state here. But it is old fashioned.
+  }
+
   state = {
     persons: [
       { id:'asdqwe', name: 'Efe', age: 30 },
@@ -15,6 +23,23 @@ class App extends Component {
     otherState: 'otherState',
     showPersons: false
   }
+
+  static getDerivedStateFromProps(props, state) {
+    // 2
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount() {
+    // 5
+    // good for http requests
+    console.log('[App.js] componentDidMount');
+  }
+
+  // componentWillMount() {
+  //   // 4 will be removed soon. don't use if possible
+  //   console.log('[App.js] componentWillMount'); 
+  // }
 
   switchNameHandler = (newName) => {
     this.setState({
@@ -50,7 +75,9 @@ class App extends Component {
     this.setState({ showPersons : !this.state.showPersons });
   }
 
-  render() {   
+  render() {
+    // 3
+    console.log('[App.js] render');
     let persons = null;
 
     if (this.state.showPersons) {
@@ -61,7 +88,7 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-        <Cockpit showPersons={this.state.showPersons} persons={this.state.persons} clicked={this.togglePersonHandler} />
+        <Cockpit title={this.props.appTitle} showPersons={this.state.showPersons} persons={this.state.persons} clicked={this.togglePersonHandler} />
         {persons}
       </div>
     );
